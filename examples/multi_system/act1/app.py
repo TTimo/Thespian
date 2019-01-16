@@ -72,10 +72,12 @@ class Analyzer(ActorTypeDispatcher):
 if __name__ == "__main__":
     import sys
     base='multiprocTCPBase'
+    cap={'Admin Port': 12345}
     if len(sys.argv) > 1:
         base=sys.argv[1]
     asys = ActorSystem(
         systemBase=base,
+        capabilities=cap,
         logDefs=logcfg
     )
 
