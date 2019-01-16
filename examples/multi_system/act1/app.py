@@ -71,7 +71,13 @@ class Analyzer(ActorTypeDispatcher):
 
 if __name__ == "__main__":
     import sys
-    asys = ActorSystem((sys.argv + ['multiprocTCPBase'])[1], logDefs=logcfg)
+    base='multiprocTCPBase'
+    if len(sys.argv) > 1:
+        base=sys.argv[1]
+    asys = ActorSystem(
+        systemBase=base,
+        logDefs=logcfg
+    )
 
     # Note: the following doesn't work because actor is created by
     # admin, started by the start.py, and the Acceptor class is not

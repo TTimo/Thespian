@@ -9,7 +9,7 @@ logcfg = {
     },
     'handlers': {
         'h1': {'class': 'logging.FileHandler',
-               'filename': 'start.log',
+               'filename': 'thespian.log',
                'formatter': 'normal',
                'level': logging.DEBUG},
     },
@@ -20,4 +20,10 @@ logcfg = {
 
 
 if __name__ == "__main__":
-    ActorSystem((sys.argv + ['multiprocTCPBase'])[1], logDefs=logcfg)
+    base='multiprocTCPBase'
+    if len(sys.argv) > 1:
+        base=sys.argv[1]
+    ActorSystem(
+        systemBase=base,
+        logDefs=logcfg
+    )
