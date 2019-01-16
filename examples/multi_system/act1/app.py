@@ -3,6 +3,23 @@ from datetime import timedelta
 from encoder import EncodeThis, Encoded, Encoder, Base64Encoder, Rot13Encoder
 from morse import MorseEncoder
 
+import logging
+
+logcfg = {
+    'version': 1,
+    'formatters': {
+        'normal': {'format': '%(levelname)-8s %(message)s'},
+    },
+    'handlers': {
+        'h1': {'class': 'logging.FileHandler',
+               'filename': 'app.log',
+               'formatter': 'normal',
+               'level': logging.DEBUG},
+    },
+    'loggers': {
+        '': {'handlers': ['h1',], 'level': logging.DEBUG}
+    },
+}
 
 class Acceptor(ActorTypeDispatcher):
 
@@ -54,7 +71,7 @@ class Analyzer(ActorTypeDispatcher):
 
 if __name__ == "__main__":
     import sys
-    asys = ActorSystem((sys.argv + ['multiprocTCPBase'])[1])
+    asys = ActorSystem((sys.argv + ['multiprocTCPBase'])[1], logDefs=logcfg)
 
     # Note: the following doesn't work because actor is created by
     # admin, started by the start.py, and the Acceptor class is not
