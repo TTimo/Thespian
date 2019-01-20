@@ -10,6 +10,8 @@ shutdown.
 
 '''
 
+import os
+
 from thespian.system.systemBase import systemBase
 from thespian.system.utilis import thesplog
 from thespian.system.multiprocCommon import multiprocessCommon
@@ -23,5 +25,5 @@ class ActorSystemBase(multiprocessCommon):
     def __init__(self, system, logDefs = None):
         system.capabilities['Thespian ActorSystem Name'] = 'multiprocTCPBase'
         system.capabilities['Thespian ActorSystem Version'] = 2
-        system.capabilities['Thespian Watch Supported'] = True
+        system.capabilities['Thespian Watch Supported'] = os.name != 'nt'
         super(ActorSystemBase, self).__init__(system, logDefs)
